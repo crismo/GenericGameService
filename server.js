@@ -1,5 +1,6 @@
 const express = require('express');
 const server = express();
+const cors = require("cors")
 const gameRouter = require('./routes/game')
 const port = (process.env.PORT || 8080);
 
@@ -13,8 +14,15 @@ const usageKeys = () => {
     return keys
 }
 
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200
+}
+
 server.set('port', port);
+server.use(cors(corsOptions))
 server.use(express.json())
+
 server.get('/', (req, res, next) => { res.status(200).send('Ludo Hub').end(); });
 
 server.use((req, res, next) => {
