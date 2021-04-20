@@ -9,6 +9,7 @@ class GameController {
     static create(req, res, next) {
         const game = new Game();
         game.players.push(req.body.player);
+        game.state = req.body.state;
         GameController.games.push(game);
         res.status(200).json(game);
         next();
